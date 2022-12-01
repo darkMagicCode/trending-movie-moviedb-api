@@ -1,0 +1,76 @@
+<div class=" container">
+  <div class="row">
+    <div class="col-md-3">
+      <img
+        class="w-100 rounded-3 border"
+        [src]="imgpath + itemDetails.poster_path"
+        alt="movie"
+      />
+    </div>
+    <div class="col-md-9">
+      <h3 class=" border-start border-warning p-3 border-3">{{ itemDetails.title }}{{ itemDetails.name }}</h3>
+  
+      <h3 class="h5">{{ itemDetails.tagline }}</h3>
+  
+      <p *ngIf="itemDetails.overview" class="lead">{{ itemDetails.overview }}</p>
+  
+      <h6 *ngIf="itemDetails.vote_average" class="btn btn-warning noncurser">
+        <i class="fas fa-star"></i> {{ itemDetails.vote_average.toFixed(1) }} / 10
+      </h6>
+      <br />
+  
+      <br />
+  
+      <p class="lead mt-4 text-capitalize">type :</p>
+  
+      <p
+        class="noncurser me-1 btn btn-dark p-2"
+        *ngFor="let item of itemDetails.genres"
+      >
+        {{ item.name }}
+      </p>
+  
+      <h6 *ngIf="itemDetails.status">
+        <span class="btn noncurser btn-dark p-2"
+          >{{ itemDetails.status }} {{ itemDetails.release_date }}</span
+        >
+      </h6>
+  
+      <p class="lead mt-4 text-capitalize">production companies :</p>
+  
+      <p
+        class="noncurser me-1 btn btn-dark p-2"
+        *ngFor="let item of itemDetails.production_companies"
+      >
+        {{ item.name }}
+      </p>
+      <br />
+  
+      <a
+        target="_blank"
+        [href]="itemDetails.homepage"
+        class="my-3 btn btn-danger"
+      >
+        Movie Site</a
+      >
+    </div>
+    <div class=" container">
+      <p class=" lead text-center fs-1 border-start border-end my-5">similar category to watch</p>
+    </div>
+  
+  <div class="row">
+    <div class="col-md-2 curser " *ngFor="let item of similerMov|pipSeeMore:seeMoreNum" (click)="getSimiler(item.id,mediaType)" [routerLink]="['/moviedetails', item.id,mediaType]">
+      <img class="w-100" [src]="imgpath+item.poster_path" alt="">
+      <h5>{{item.title}}</h5>
+    </div>
+  
+    
+  </div>
+
+ 
+  </div>
+ <div class=" text-center">
+   <a  class="btn btn-outline-danger"  (click)="seeMore()">see more</a>
+  
+ </div>
+</div>
